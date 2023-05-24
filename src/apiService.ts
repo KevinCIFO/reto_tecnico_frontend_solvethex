@@ -1,34 +1,34 @@
-import axios from 'axios';
+import axios from "axios"
 
 interface Usuario {
-  username: string;
-  email: string;
+  username: string
+  email: string
 }
 
 class ApiService {
   obtenerUsuarios() {
     return axios
-      .get('http://localhost:3000/api/user')
+      .get("http://localhost:3000/api/user")
       .then((response) => {
-        console.log(response.data.data);
-        return response.data.data;
+        console.log(response.data.data)
+        return response.data.data
       })
       .catch((error) => {
-        console.error(error);
-        throw error;
-      });
+        console.error(error)
+        throw error
+      })
   }
   crearUsuario(usuario: Usuario) {
     return axios
-      .post('http://localhost:3000/api/user/create', usuario)
+      .post("http://localhost:3000/api/user/create", usuario)
       .then((response) => {
-        console.log(response.data);
-        return response.data;
+        console.log(response.data)
+        return response.data
       })
       .catch((error) => {
-        console.error(error);
-        throw error;
-      });
+        console.error(error)
+        throw error
+      })
   }
   obtenerUsuario(userId: number) {
     return axios
@@ -40,7 +40,7 @@ class ApiService {
       .catch((error) => {
         console.error(error)
         throw error
-      });
+      })
   }
   actualizarUsuario(userId: number, usuario: Usuario) {
     return axios
@@ -68,4 +68,4 @@ class ApiService {
   }
 }
 
-export default new ApiService();
+export default new ApiService()

@@ -44,11 +44,15 @@
         Crear usuario
       </button>
     </form>
-    <div v-if="errorMessage" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <div
+      v-if="errorMessage"
+      class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+      role="alert"
+    >
       <span class="font-medium">Error:</span> {{ errorMessage }}
     </div>
     <button
-      @click="volver"
+      @click="volver()"
       type="button"
       class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
     >
@@ -58,45 +62,45 @@
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
-import ApiService from "../apiService";
-import router from "../router";
+import { ref } from "vue"
+import ApiService from "../apiService"
+import router from "../router"
 
 export default {
   setup() {
     const newUser = ref({
       username: "",
-      email: "",
-    });
+      email: ""
+    })
 
-    const errorMessage = ref("");
+    const errorMessage = ref("")
 
     const crearUsuario = () => {
       if (newUser.value.username.toLowerCase() === "admin") {
-        errorMessage.value = "El nombre de usuario no puede ser admin";
-        return;
+        errorMessage.value = "El nombre de usuario no puede ser admin"
+        return
       }
 
       ApiService.crearUsuario(newUser.value)
         .then(() => {
-          router.push("/");
+          router.push("/")
         })
         .catch((error) => {
-          errorMessage.value = "Error al crear el usuario: " + error.message;
-          console.error(error);
-        });
-    };
+          errorMessage.value = "Error al crear el usuario: " + error.message
+          console.error(error)
+        })
+    }
 
     const volver = () => {
-      router.push("/");
-    };
+      router.push("/")
+    }
 
     return {
       newUser,
       errorMessage,
       crearUsuario,
-      volver,
-    };
-  },
-};
+      volver
+    }
+  }
+}
 </script>
